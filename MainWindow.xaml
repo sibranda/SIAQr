@@ -1,0 +1,51 @@
+﻿<Window x:Class="SIAQr.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIAQr"
+        mc:Ignorable="d"
+        Title="SIAQr v.0.1" Margin="0,0,0,0" Height="450" Width="660" ResizeMode="CanMinimize" >
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White"/>
+                <GradientStop Color="SlateGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="lblTitle" Content="Setup Intune Android QR Code" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" Padding="0,0,0,0" Height="30" Width="330" FontSize="22" FontWeight="Bold"/>
+
+        <StackPanel x:Name="ContentWindow" VerticalAlignment="Top" Margin="20,60,320,40" Height="Auto">
+            <Label x:Name="lblIntuneToken" Content="Intune Token:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,0,0,0" Padding="0,0,0,0" Height="18" Width="80" FontWeight="Bold"/>
+            <TextBox x:Name ="txtBoxIntuneToken" ToolTip="Insert your Intune Token Code"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" TextChanged="FunctionNullQr"/>
+            <CheckBox x:Name="chkConfigWifi" Content="Configure WiFi?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" FontWeight="Bold" Click="FunctionConfigureWifi"/>
+            <Label x:Name="lblWifiSSID" Content="WiFi SSID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="80" FontWeight="Bold"/>
+            <TextBox x:Name ="txtBoxWifiSSID" ToolTip="Insert WiFi SSID Name"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" TextChanged="FunctionNullQr"/>
+            <CheckBox x:Name="chkWifiHidden" Content="WiFi Hidden?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" FontWeight="Bold" Click="FunctionWifiHidden"/>
+            <Label x:Name="lblWifiSecurity" Content="WiFi Security:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="80" FontWeight="Bold"/>
+            <ComboBox x:Name="cmbWifiSecurity" ToolTip="Choose WiFi Security"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Width="200"/>
+            <Label x:Name="lblWifiPassword" Content="WiFi Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="90" FontWeight="Bold"/>
+            <PasswordBox x:Name ="psdWifiPassword" ToolTip="Type WiFi Password"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" PasswordChanged="FunctionNullQrPsd"/>
+            <CheckBox x:Name="chkConfigProxy" Content="Configure Proxy?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" FontWeight="Bold" Click="FunctionConfigProxy"/>
+            <Label x:Name="lblProxyHost" Content="Proxy Host:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="95" FontWeight="Bold"/>
+            <TextBox x:Name ="txtBoxProxyHost" ToolTip="Insert WiFi Proxy Host. Example: proxy.microsoft.com"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" TextChanged="FunctionNullQr"/>
+            <Label x:Name="lblProxyPort" Content="Proxy Port:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="95" FontWeight="Bold"/>
+            <TextBox x:Name ="txtBoxProxyPort" ToolTip="Insert WiFi Proxy Port. Example: 8181"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" TextChanged="FunctionNullQr"/>
+            <Label x:Name="lblProxyBypass" Content="Proxy Bypass:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0" Padding="0,0,0,0" Height="18" Width="95" FontWeight="Bold"/>
+            <TextBox x:Name ="txtBoxProxyBypass" ToolTip="Insert WiFi Proxy Bypass. Example: microsoft.com,contoso.com"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,-20,0,0" Height="20" Width="200" TextChanged="FunctionNullQr"/>
+            <CheckBox x:Name="chkAllSystemApps" Content="Enable System Apps?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" FontWeight="Bold" Click="FunctionEnableSysApps"/>
+            <CheckBox x:Name="chkCustomLogo" Content="Custom Logo?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" FontWeight="Bold" Click="FunctionEnableCustomLogo"/>
+            <Button x:Name="btnCustomLogo" Content="..." HorizontalAlignment="Left" Margin="110,-20,0,0" Height="18" Width="25" VerticalContentAlignment="top" Padding="0,0,0,0" VerticalAlignment="Bottom" Click="FunctionOpenCustomLogo" Visibility="Collapsed"/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Top" Margin="360,60,40,100" Height="260">
+            <Viewbox Margin="0,0,0,0" Height="auto" Width="auto">
+                <Border BorderThickness="2" BorderBrush="Black" >
+                    <Image x:Name="imgQRCode" HorizontalAlignment="Left" Height="140" Width="140" VerticalAlignment="Top"  Stretch="Fill"/>
+                </Border>
+            </Viewbox>
+        </StackPanel>
+        <Button x:Name="Generate" Content="Generate" HorizontalAlignment="Left" Margin="380,0,0,30" Height="30" Width="80" VerticalAlignment="Bottom" Click="FunctionCheckData"/>
+        <Button x:Name="SaveFile" Content="Save to File" HorizontalAlignment="Left" Margin="505,0,0,30" Height="30" Width="80" VerticalAlignment="Bottom" Click="FunctionCheckData"/>
+        <Label x:Name="LabelDev" Content="Dev. Sidnei Brandao" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="545,0,0,3" VerticalAlignment="Bottom" Width="90" Height="20" FontSize="9" Cursor="Hand" MouseLeftButtonDown="FunctionDev"/>
+    </Grid>
+</Window>
