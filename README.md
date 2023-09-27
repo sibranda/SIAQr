@@ -14,6 +14,6 @@ The QR Code is just to facilitate the user to Enroll the mobile without need to 
 
 Wit this in Mind have Fun and be free to send me feedbacks.
 
-<img width="600" alt="SIAQr" src="https://github.com/sibranda/SIAQr/assets/62342144/677b06ed-0171-4885-bcb1-3a8fa7e79691">
+<img width="600" alt="SIAQr" src="https://github.com/sibranda/SIAQr/assets/62342144/a4aa51c6-9417-4954-8b40-e0e9d03509b6">
 
 Be Safe!
